@@ -1,0 +1,25 @@
+{:min-bb-version "0.9.0"
+
+ :tasks
+ {:requires ([babashka.fs :as fs]
+             [clojure.string :as str])
+
+  clean (doseq [dir [".cpcache/"
+                     ".shadow-cljs/"
+                     "expo/target"]]
+          (fs/delete-tree dir))
+
+  -node-modules (shell {:dir "expo"} "yarn install")
+
+  expo-start
+  {:depends [-node-modules]
+   :task (do (shell {:out nil} "watchman watch-del" (fs/cwd))
+             (shell {:dir "expo"} "yarn expo start"))}
+
+  shadow-dev
+  {:depends [-node-modules]
+   :task (clojure "-M -m shadow.cljs.devtools.cli watch mobile")}
+
+  shadow-release
+  {:depends [-node-modules]
+   :task (clojure "-M -m shadow.cljs.devtools.cli release mobile")}}}

@@ -1,0 +1,10 @@
+{:paths ["src"]
+ :deps  {cider/cider-nrepl             {:mvn/version "0.28.6"}
+         fipp/fipp                     {:mvn/version "0.6.26"}
+         nrepl/nrepl                   {:mvn/version "1.0.0"}
+         org.clojure/clojure           {:mvn/version "1.11.1"}
+         refactor-nrepl/refactor-nrepl {:mvn/version "3.5.5"}
+         swiss-arrows/swiss-arrows     {:mvn/version "1.0.0"}
+         thheller/shadow-cljs          {:mvn/version "2.20.2"}
+         applied-science/js-interop    {:mvn/version "0.3.3"}
+         lilactown/helix               {:mvn/version "0.1.8"}}}

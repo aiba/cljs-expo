@@ -1,0 +1,15 @@
+{:nrepl  {:middleware [refactor-nrepl.middleware/wrap-refactor]}
+ :npm-deps {:install-dir "expo"}
+ :js-options {:js-package-dirs ["expo/node_modules"]}
+ :builds {:mobile {:target :react-native
+                   :deps {:aliases [:mobile]}
+                   :output-dir "expo/target",
+                   :dev {:compiler-options {}
+                         :init-fn my-app.main/init
+                         :devtools {:repl-pprint true
+                                    :reload-strategy :full
+                                    :preloads [helix.experimental.refresh]}}
+                   :release {:init-fn my-app.main/init
+                             :output-dir "expo/target"
+                             :compiler-options {:optimizations :advanced
+                                                :source-map true}}}}}
