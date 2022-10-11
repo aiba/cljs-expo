@@ -3,7 +3,10 @@
 const Metro = require('metro');
 const fs = require('fs');
 
-fs.mkdirSync('build', {recursive: true});
+const BUILD_DIR = 'build'
+const PLATFORM = 'ios'
+
+fs.mkdirSync(BUILD_DIR, {recursive: true});
 
 async function build() {
   const config = await Metro.loadConfig();
@@ -12,9 +15,9 @@ async function build() {
   await Metro.runBuild(config, {
     entry: 'target/index.js',
     sourceMap: true,
-    platform: 'ios',
+    platform: PLATFORM,
     minify: true,
-    out: 'build/expo-ios.js',
+    out: `${BUILD_DIR}/expo-${PLATFORM}.js`,
   });
 
   // TODO: see if Babel is generating source maps correctly inside metro-babel-transformer
