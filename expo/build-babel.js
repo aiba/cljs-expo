@@ -18,7 +18,7 @@ const src = fs.readFileSync(FILENAME, 'utf8')
 
 const babelConfig = {
   ast: true,
-  code: false,
+  // code: false,         // <-- set by metro-babel-transformer
   filename: FILENAME,
   sourceType: "module",
   inputSourceMap: true,
