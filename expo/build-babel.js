@@ -10,14 +10,15 @@ const { generateFunctionMap } = require("metro-source-map");
 const fs = require('fs')
 
 
-const FILENAME = "target/index.js"
+const INFILE = "target/index.js"
+const OUTFILE = "target/index2.js"
 
-const src = fs.readFileSync(FILENAME, 'utf8')
+const src = fs.readFileSync(INFILE, 'utf8')
 
 const babelConfig = {
   ast: true,
   // code: false,         // <-- set by metro-babel-transformer
-  filename: FILENAME,
+  filename: INFILE,
   sourceType: "module",
   inputSourceMap: true,
   sourceMaps: true,
@@ -25,4 +26,7 @@ const babelConfig = {
 
 const sourceAst = parseSync(src, babelConfig);
 const result = transformFromAstSync(sourceAst, src, babelConfig);
-console.log(result)
+
+console.log(`writing ${OUTFILE}…`)
+fs.writeFileSync(`${OUTFILE}`, result.code)
+fs.writeFileSync(`${OUTFILE}.map`, JSON.stringify(result.map, null, 2))
