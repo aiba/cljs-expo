@@ -3,15 +3,15 @@
 
 const { transformSync, parseSync, transformFromAstSync } = require("@babel/core");
 
-const HermesParser = require("hermes-parser");
+// const HermesParser = require("hermes-parser");
 
-const { generateFunctionMap } = require("metro-source-map");
+// const { generateFunctionMap } = require("metro-source-map");
+
 
 const fs = require('fs')
 
-
 const INFILE = "target/index.js"
-const OUTFILE = "target/index2.js"
+const OUTFILE = "target/babel-index.js"
 
 const src = fs.readFileSync(INFILE, 'utf8')
 
