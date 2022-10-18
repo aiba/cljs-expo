@@ -10,6 +10,7 @@
   ($ rn/View {:style #js {:flex 1
                           :alignItems "center"
                           :justifyContent "center"}}
+     (throw (js/Error. "my error thrown from my-app.main/root"))
      ($ rn/Text {:style #js {:fontSize 24 :color "blue"}}
         "Hello from ClojureScript")))
 
