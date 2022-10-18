@@ -1,6 +1,7 @@
 const fs = require('fs')
 const remapping = require('@ampproject/remapping')
 const {AnyMap} = require('@jridgewell/trace-mapping')
+const {SourceMapConsumer} = require('source-map')
 
 const read = f => fs.readFileSync(f,'utf8')
 const write = (f,v) => fs.writeFileSync(f,v)
@@ -27,5 +28,13 @@ const loader = (file,ctx) => isTarget(file) ? targetMap : null
 
 // produce a merged source map
 const fixedMap = remapping(metroMap, loader)
-
 writeJson(fixedFile, fixedMap)
+
+// test source map
+const consumer = new SourceMapConsumer(fixedMap)
+const testPos = consumer.generatedPositionFor({
+  source: 'my_app/main.cljs',
+  line: 14,
+  column: 6,
+})
+console.log(testPos)
